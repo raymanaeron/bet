@@ -8,7 +8,8 @@ import { AppConstants } from 'src/environments/app-constants';
   providedIn: 'root'
 })
 export class AppService {
-  rootURL = '/api';
+  //rootURL = 'api';
+  rootURL = '';
 
   constructor(private http: HttpClient) {
     if (environment.production) {
@@ -25,9 +26,12 @@ export class AppService {
     return message;
   }
 
-  getIdKey() {
-    return this.http.get(this.rootURL + '/idkey')
-      .pipe(map(res=>res));
+  getRandKey() {
+    return this.http.get(this.rootURL + '/randkey').pipe(map(res=>res));
+  }
+
+  getProFootballData() {
+    return this.http.get(this.rootURL + '/profootball').pipe(map(res=>res));
   }
 
   signout() {

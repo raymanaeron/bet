@@ -28,6 +28,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 
+// 3rd parties
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+
+// Local
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
@@ -61,6 +65,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatButtonToggleModule,
     MatStepperModule,
     MatTabsModule,
+    NgxJsonViewerModule
   ],
   providers: [
     FormBuilder

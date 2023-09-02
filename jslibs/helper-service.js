@@ -10,6 +10,15 @@ module.exports = function (app) {
         res.send(uuidv4().toString().replace(/-/g, ''));
     });
 
+    /* returns a random key in Json format */
+    app.get('/randkey', (req, res) => {
+        var result = {
+            'key' :  uuidv4().toString().replace(/-/g, '')
+        };
+
+        res.status(200).send(result);
+    });
+
     /* Generates a secret key -- used as an env variable */
     app.get('/randomsecret',(req,res) => {
         var result = crypto.randomBytes(64).toString('hex');

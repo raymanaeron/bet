@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 });
 
 // Import other services
+require('./jslibs/odds-api-service')(app);
 require('./jslibs/auth-service')(app);
 require('./jslibs/helper-service')(app);
 require('./jslibs/data-service')(app);
