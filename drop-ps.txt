@@ -6,3 +6,12 @@ https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubunt
 
 Install and setup PM2
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-22-04
+
+Must configure ngix to map to node port
+	https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-22-04
+
+	Edit default config
+	nano /etc/nginx/sites-available/default
+
+	
+	
