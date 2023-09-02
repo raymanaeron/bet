@@ -13,5 +13,8 @@ Must configure ngix to map to node port
 	Edit default config
 	nano /etc/nginx/sites-available/default
 
-	
-	
+To run Angular from the host command prompt
+	ng serve --public-host bet.aeronlab.net
+
+Must install typescrtipt
+ 	npm install -g typescript

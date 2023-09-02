@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+//import { AuthService } from './auth-service';
+//import { LocalStorageService } from './local-storage-service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app-ux';
+  title = 'BetApp';
+  loggedIn = false;
+  userName = "default";
+  accountBalance = 0.00;
+
+  signIn(): void {
+
+  }
+
+  signOut(): void {
+    
+  }
 }
