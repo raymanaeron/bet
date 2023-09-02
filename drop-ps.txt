@@ -1,2 +1,5 @@
 digital ocean
 drop pass LasVegasCasino$1a
+
+Must update nodejs in digital ocean
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
