@@ -23,10 +23,8 @@
     "crypto": "^1.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "google-libphonenumber": "^3.2.27",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
-    "twilio": "^3.71.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
