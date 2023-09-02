@@ -3,3 +3,6 @@ drop pass LasVegasCasino$1a
 
 Must update nodejs in digital ocean
 https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
+
+Install and setup PM2
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-22-04
