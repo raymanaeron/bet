@@ -27,7 +27,6 @@ require('./jslibs/admin-tasks')(app);
 app.use('*', (req, res, next) => {
     //res.sendFile(path.join(__dirname, "/app-ux/dist/app-ux/index.html"));
     res.sendFile(process.cwd() + "/app-ux/dist/app-ux/index.html");
-    //res.sendFile("/app-ux/dist/app-ux/index.html");
 });
 
 
