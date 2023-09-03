@@ -1,11 +1,16 @@
 <p>betting-card works!</p>
 <mat-card>
-    <mat-card-title>{{ betOption.home_team }} vs. {{ betOption.away_team }}</mat-card-title>
+    <mat-card-title>{{ data.home_team }} vs. {{ data.away_team }}</mat-card-title>
     <mat-card-content>
-        <p>Bookmaker: {{ betOption.bookmaker }}</p>
-        <p>Market: {{ betOption.market_key }}</p>
-        <p>Outcome: {{ betOption.outcome_name }}</p>
-        <p>Odds: {{ betOption.price }}</p>
+        <p>Team: {{ data.team_name }}</p>
+        <p>Spread Point: {{ data.spread_point }}</p>
+        <p>Spread Price: {{ data.spread_price }}</p>
+        <p>Total Point Under: {{ data.total_point_under }}</p>
+        <p>Total Price Under: {{ data.total_price_under }}</p>
+        <p>Total Point Over: {{ data.total_point_over }}</p>
+        <p>Total Price Over: {{ data.total_price_over }}</p>
+        <p>Money Line: {{ data.money_line }}</p>
+        <p>Last Update: {{ data.market_last_update }}</p>
     </mat-card-content>
     <mat-card-actions>
         <!--

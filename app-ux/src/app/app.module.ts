@@ -35,12 +35,14 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 // Local
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BettingCardComponent } from './betting-card/betting-card.component';
+import { CardViewComponent } from './card-view/card-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    BettingCardComponent
+    BettingCardComponent,
+    CardViewComponent
   ],
   imports: [
     BrowserModule,

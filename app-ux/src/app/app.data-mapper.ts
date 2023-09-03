@@ -1,5 +1,5 @@
 // DataUtility.ts
-import { FlattenedDisplayData } from './data-models/FlttenedDisplayData';
+import { FlattenedDisplayData } from './data-models/FlattenedDisplayData';
 
 export class DataUtility {
 
