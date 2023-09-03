@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-import { Odd } from '../data-models/odds';
 import { DataUtility } from '../app.data-mapper';
-import { InputData } from '../data-models/InputData';
 
 // required for date pipe
 import { CommonModule } from '@angular/common';

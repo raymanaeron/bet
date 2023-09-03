@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -45,6 +46,7 @@ import { CardViewComponent } from './card-view/card-view.component';
     CardViewComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -72,6 +74,9 @@ import { CardViewComponent } from './card-view/card-view.component';
     MatTabsModule,
     MatCardModule,
     NgxJsonViewerModule
+  ],
+  exports: [
+    CardViewComponent
   ],
   providers: [
     FormBuilder

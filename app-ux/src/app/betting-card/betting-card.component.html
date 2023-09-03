@@ -1,7 +1,7 @@
-<p>betting-card works!</p>
 <mat-card>
     <mat-card-title>{{ data.home_team }} vs. {{ data.away_team }}</mat-card-title>
     <mat-card-content>
+        <p>Bookmaker: {{ data.bookmaker_key }}</p>
         <p>Team: {{ data.team_name }}</p>
         <p>Spread Point: {{ data.spread_point }}</p>
         <p>Spread Price: {{ data.spread_price }}</p>
@@ -13,8 +13,6 @@
         <p>Last Update: {{ data.market_last_update }}</p>
     </mat-card-content>
     <mat-card-actions>
-        <!--
         <button mat-button (click)="placeBet()">Bet</button>
-        -->
     </mat-card-actions>
 </mat-card>
