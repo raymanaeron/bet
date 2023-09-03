@@ -1,0 +1,15 @@
+<p>betting-card works!</p>
+<mat-card>
+    <mat-card-title>{{ betOption.home_team }} vs. {{ betOption.away_team }}</mat-card-title>
+    <mat-card-content>
+        <p>Bookmaker: {{ betOption.bookmaker }}</p>
+        <p>Market: {{ betOption.market_key }}</p>
+        <p>Outcome: {{ betOption.outcome_name }}</p>
+        <p>Odds: {{ betOption.price }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <!--
+        <button mat-button (click)="placeBet()">Bet</button>
+        -->
+    </mat-card-actions>
+</mat-card>

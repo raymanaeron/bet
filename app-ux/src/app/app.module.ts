@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -33,11 +34,13 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 // Local
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BettingCardComponent } from './betting-card/betting-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    BettingCardComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatButtonToggleModule,
     MatStepperModule,
     MatTabsModule,
+    MatCardModule,
     NgxJsonViewerModule
   ],
   providers: [

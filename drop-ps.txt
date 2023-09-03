@@ -18,3 +18,6 @@ To run Angular from the host command prompt
 
 Must install typescrtipt
  	npm install -g typescript
+
+Game breakdown h1/q1/q3 etc API - you have to find it by a game id
+	https://api.the-odds-api.com/v4/sports/americanfootball_nfl/events/42db668449664943833b5c04a583328a/odds?apiKey=01a3ecc0d81e878c777dd52c7d518540&oddsFormat=american&markets=h2h_h1,h2h_q1,spreads_h1&regions=us
