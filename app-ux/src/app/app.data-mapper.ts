@@ -1,45 +1,94 @@
 // DataUtility.ts
-import { InputData } from './data-models/InputData'
-import { FlattenedData } from './data-models/FlattenedData';
+import { FlattenedDisplayData } from './data-models/FlttenedDisplayData';
 
 export class DataUtility {
-  static flattenData(input: InputData): FlattenedData[] {
-    const result: FlattenedData[] = [];
-    for (const bookmaker of input.bookmakers) {
-      for (const market of bookmaker.markets) {
-        for (const outcome of market.outcomes) {
-          result.push({
-            id: input.id,
-            sport_key: input.sport_key,
-            sport_title: input.sport_title,
-            commence_time: input.commence_time,
-            home_team: input.home_team,
-            away_team: input.away_team,
-            bookmaker: bookmaker.key,
-            market_key: market.key,
-            market_last_update: market.last_update,
-            outcome_name: outcome.name,
-            price: outcome.price,
-            point: outcome.point
-          });
-        }
-      }
+
+  public static flattenInputData(data: any[]): FlattenedDisplayData[] {
+    const result: FlattenedDisplayData[] = [];
+
+    if (!Array.isArray(data)) {
+      console.error("Input data is not an array");
+      return result;
     }
+
+    data.forEach(item => {
+      if (!Array.isArray(item.bookmakers)) {
+        console.error("Item's bookmakers property is not an array");
+        return;
+      }
+
+      item.bookmakers.forEach((bookmaker: { title: any; markets: any[]; }) => {
+
+        let homeTeamData: FlattenedDisplayData = {
+          id: item.id,
+          sport_key: item.sport_key,
+          sport_title: item.sport_title,
+          bookmaker_key: bookmaker.title,
+          home_team: item.home_team,
+          away_team: item.away_team,
+          commence_time: item.commence_time,
+          market_last_update: "",
+          team_name: item.home_team
+        };
+
+        let awayTeamData: FlattenedDisplayData = {
+          ...homeTeamData,
+          team_name: item.away_team
+        };
+
+        if (!Array.isArray(bookmaker.markets)) {
+          console.error("Bookmaker's markets property is not an array");
+          return;
+        }
+
+        bookmaker.markets.forEach((market) => {
+          homeTeamData.market_last_update = market.last_update;
+          awayTeamData.market_last_update = market.last_update;
+
+          switch (market.key) {
+            case 'spreads':
+              market.outcomes?.forEach((outcome: { name: string | undefined; point: number | undefined; price: number | undefined; }) => {
+                if (outcome.name === homeTeamData.team_name) {
+                  homeTeamData.spread_point = outcome.point;
+                  homeTeamData.spread_price = outcome.price;
+                } else if (outcome.name === awayTeamData.team_name) {
+                  awayTeamData.spread_point = outcome.point;
+                  awayTeamData.spread_price = outcome.price;
+                }
+              });
+              break;
+            case 'totals':
+              market.outcomes?.forEach((outcome: { name: string; point: number | undefined; price: number | undefined; }) => {
+                if (outcome.name === 'Under') {
+                  homeTeamData.total_point_under = outcome.point;
+                  homeTeamData.total_price_under = outcome.price;
+                  awayTeamData.total_point_under = outcome.point;
+                  awayTeamData.total_price_under = outcome.price;
+                } else if (outcome.name === 'Over') {
+                  homeTeamData.total_point_over = outcome.point;
+                  homeTeamData.total_price_over = outcome.price;
+                  awayTeamData.total_point_over = outcome.point;
+                  awayTeamData.total_price_over = outcome.price;
+                }
+              });
+              break;
+            case 'h2h':
+              market.outcomes?.forEach((outcome: { name: string; price: number | undefined; }) => {
+                if (outcome.name === homeTeamData.team_name) {
+                  homeTeamData.money_line = outcome.price;
+                } else if (outcome.name === awayTeamData.team_name) {
+                  awayTeamData.money_line = outcome.price;
+                }
+              });
+              break;
+          }
+        });
+
+        result.push(homeTeamData);
+        result.push(awayTeamData);
+      });
+    });
+
     return result;
   }
-
-  static flattenDataBulk(inputs: InputData[]): FlattenedData[] {
-    const results: FlattenedData[] = [];
-    for (const input of inputs) {
-      const flattenedSingle = this.flattenData(input);
-      results.push(...flattenedSingle);
-    }
-    return results;
-  }
 }
-
-// Usage example can be similar:
-// import { DataUtility } from './DataUtility';
-// const inputDataArray: InputData[] = [/* ... array of your JSON data ... */];
-// const flattenedBulk = DataUtility.flattenDataBulk(inputDataArray);
-// console.log(flattenedBulk);

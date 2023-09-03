@@ -3,7 +3,6 @@ import { AppService } from '../app.service';
 import { Odd } from '../data-models/odds';
 import { DataUtility } from '../app.data-mapper';
 import { InputData } from '../data-models/InputData';
-import { FlattenedData } from '../data-models/FlattenedData';
 
 // required for date pipe
 import { CommonModule } from '@angular/common';
@@ -16,19 +15,18 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent {
   table_data: any[];
   constructor(private appService: AppService) {
-
   }
 
   ngOnInit(): void {
     this.appService.getProFootballData().subscribe({
       next: (data) => {
         var results = <any>data;
+        
+        var rows = DataUtility.flattenInputData(results.data);
+
         this.table_data = [];
-        results.data.forEach((d: InputData) => {
-          var rows = DataUtility.flattenData(d);
-          rows.forEach((r:any) => {
-            this.table_data.push(r);
-          })
+        rows.forEach((r: any) => {
+          this.table_data.push(r);
         });
       },
       error: (error) => {
@@ -38,24 +36,5 @@ export class DashboardComponent {
         console.log("Pro football fetch done")
       }
     })
-
-    function getFirstItem(dataArray: InputData[]): InputData | null {
-      if (dataArray && dataArray.length > 0) {
-        return dataArray[0];
-      }
-      return null;  // or return undefined, based on your preference
-    }
-    /*
-    this.appService.getRandKey().subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-      }
-    })
-    */
   }
 }

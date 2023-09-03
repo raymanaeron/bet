@@ -1,28 +1,36 @@
 <table class="styled-table">
     <thead>
         <th><span>Title</span></th>
-        <th><span>Commence Time</span></th>
+        <th><span>Bookmaker</span></th>
         <th><span>Home Team</span></th>
         <th><span>Away Team</span></th>
-        <th><span>Bookmaker</span></th>
-        <th><span>Market Key</span></th>
-        <th><span>Last Update</span></th>
-        <th><span>Outcome Name</span></th>
-        <th><span>Price</span></th>
-        <th><span>Point</span></th>
+        <th><span>Commence Time</span></th>
+        <th><span>Name</span></th>
+        <th><span>Spread Point</span></th>
+        <th><span>Spread Price</span></th>
+        <th><span>Total Point Under</span></th>
+        <th><span>Total Price Under</span></th>
+        <th><span>Total Point Over</span></th>
+        <th><span>Total Price Over</span></th>
+        <th><span>Money Line</span></th>
+        <th><span>Last Updated</span></th>
     </thead>
     <tbody>
         <tr *ngFor="let d of table_data ">
             <td><span>{{ d.sport_title }}</span></td>
-            <td><span>{{ d.commence_time | date: "short" }}</span></td>
+            <td><span>{{ d.bookmaker_key }}</span></td>
             <td><span>{{ d.home_team }}</span></td>
             <td><span>{{ d.away_team }}</span></td>
-            <td><span>{{ d.bookmaker }}</span></td>
-            <td><span>{{ d.market_key }}</span></td>
+            <td><span>{{ d.commence_time | date: "short" }}</span></td>
+            <td><span>{{ d.team_name }}</span></td>
+            <td><span>{{ d.spread_point }}</span></td>
+            <td><span>{{ d.spread_price }}</span></td>
+            <td><span>{{ d.total_point_under }}</span></td>
+            <td><span>{{ d.total_price_under }}</span></td>
+            <td><span>{{ d.total_point_over }}</span></td>
+            <td><span>{{ d.total_price_over }}</span></td>
+            <td><span>{{ d.money_line }}</span></td>
             <td><span>{{ d.market_last_update | date: "short"  }}</span></td>
-            <td><span>{{ d.outcome_name }}</span></td>
-            <td><span>{{ d.price }}</span></td>
-            <td><span>{{ d.point }}</span></td>
         </tr>
     </tbody>
 </table>
