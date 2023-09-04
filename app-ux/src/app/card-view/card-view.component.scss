@@ -2,7 +2,7 @@
   display: grid;
   margin: 20px;
   grid-template-columns: repeat(1, 1fr); // By default, 1 card in a row for mobile views
-  gap: 16px;
+  gap: 15px;
 
   @media (min-width: 600px) {
     // Adjust these breakpoints as needed

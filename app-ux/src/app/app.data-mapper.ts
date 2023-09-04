@@ -71,6 +71,7 @@ export class DataUtility {
     return result;
   }
 
+  // Do not use this function
   public static flattenInputData(data: any[]): FlattenedDisplayData[] {
     const result: FlattenedDisplayData[] = [];
 
