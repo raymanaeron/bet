@@ -1,7 +1,75 @@
 // DataUtility.ts
 import { FlattenedDisplayData } from './data-models/FlattenedDisplayData';
+import { GameRowData } from './data-models/GameRowData';
+import { TeamData } from './data-models/TeamData';
 
 export class DataUtility {
+
+  public static flattenGameData(data: any[]): GameRowData[] {
+    const result: GameRowData[] = [];
+
+    if (!Array.isArray(data)) {
+      console.error("Input data is not an array");
+      return result;
+    }
+
+    data.forEach(item => {
+      item.bookmakers.forEach((bookmaker: any) => {
+        const homeTeamData: TeamData = { team_name: item.home_team, market_last_update: "" };
+        const awayTeamData: TeamData = { team_name: item.away_team, market_last_update: "" };
+
+        bookmaker.markets.forEach((market: any) => {
+          switch (market.key) {
+            case 'spreads':
+              market.outcomes?.forEach((outcome: any) => {
+                const currentTeam = outcome.name === item.home_team ? homeTeamData : awayTeamData;
+                currentTeam.market_last_update = market.last_update;
+
+                if (outcome.name !== 'Over' && outcome.name !== 'Under') {
+                  currentTeam.spread_point = outcome.point;
+                  currentTeam.spread_price = outcome.price;
+                }
+              });
+              break;
+            case 'totals':
+              market.outcomes?.forEach((outcome: any) => {
+                const currentTeam = outcome.name === item.home_team ? homeTeamData : awayTeamData;
+
+                if (outcome.name === 'Under') {
+                  currentTeam.total_point_under = outcome.point;
+                  currentTeam.total_price_under = outcome.price;
+                } else if (outcome.name === 'Over') {
+                  currentTeam.total_point_over = outcome.point;
+                  currentTeam.total_price_over = outcome.price;
+                }
+              });
+              break;
+            case 'h2h':
+              market.outcomes?.forEach((outcome: any) => {
+                const currentTeam = outcome.name === item.home_team ? homeTeamData : awayTeamData;
+
+                if (outcome.name !== 'Over' && outcome.name !== 'Under') {
+                  currentTeam.money_line = outcome.price;
+                }
+              });
+              break;
+          }
+        });
+
+        result.push({
+          id: item.id,
+          sport_key: item.sport_key,
+          sport_title: item.sport_title,
+          bookmaker_key: bookmaker.title,
+          game: `${item.home_team} vs. ${item.away_team}`,
+          home_team_data: homeTeamData,
+          away_team_data: awayTeamData,
+        });
+      });
+    });
+
+    return result;
+  }
 
   public static flattenInputData(data: any[]): FlattenedDisplayData[] {
     const result: FlattenedDisplayData[] = [];

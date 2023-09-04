@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataUtility } from '../app.data-mapper';
 import { AppService } from '../app.service';
-import { FlattenedDisplayData } from '../data-models/FlattenedDisplayData';
 
 // required for date pipe
 import { CommonModule } from '@angular/common';
+import { GameRowData } from '../data-models/GameRowData';
 
 @Component({
   selector: 'app-card-view',
@@ -12,8 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./card-view.component.scss']
 })
 export class CardViewComponent implements OnInit{
-  table_data: any[];
-  flattenedData: FlattenedDisplayData[] = [];
+  gameData: GameRowData[] = [];
 
   constructor(private appService: AppService) {
   }
@@ -22,7 +21,7 @@ export class CardViewComponent implements OnInit{
     this.appService.getProFootballData().subscribe({
       next: (data) => {
         var results = <any>data;
-        this.flattenedData = DataUtility.flattenInputData(results.data);
+        this.gameData = DataUtility.flattenGameData(results.data);
       },
       error: (error) => {
         console.log(error);

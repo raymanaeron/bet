@@ -1,0 +1,11 @@
+import { TeamData } from "./TeamData";
+
+export interface GameRowData {
+    id: string;
+    sport_key: string;
+    sport_title: string;
+    bookmaker_key: string;
+    game: string; // Chiefs vs. Lions
+    home_team_data: TeamData;
+    away_team_data: TeamData;
+}

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FlattenedDisplayData } from '../data-models/FlattenedDisplayData'; // Adjust the path
+import { GameRowData } from '../data-models/GameRowData';
 
 @Component({
   selector: 'app-betting-card',
@@ -7,7 +7,7 @@ import { FlattenedDisplayData } from '../data-models/FlattenedDisplayData'; // A
   styleUrls: ['./betting-card.component.scss']
 })
 export class BettingCardComponent {
-  @Input() data: FlattenedDisplayData;
+  @Input() data: GameRowData;
 
   placeBet() {
     // Implement the behavior for placing a bet
