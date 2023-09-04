@@ -32,8 +32,9 @@ export class DataUtility {
               });
               break;
             case 'totals':
-              market.outcomes?.forEach((outcome: any) => {
-                const currentTeam = outcome.name === item.home_team ? homeTeamData : awayTeamData;
+              market.outcomes?.forEach((outcome: any, index: number) => {
+                // Using index to determine the current team: 0 is home and 1 is away
+                const currentTeam = index === 0 ? homeTeamData : awayTeamData;
 
                 if (outcome.name === 'Under') {
                   currentTeam.total_point_under = outcome.point;
@@ -44,6 +45,7 @@ export class DataUtility {
                 }
               });
               break;
+
             case 'h2h':
               market.outcomes?.forEach((outcome: any) => {
                 const currentTeam = outcome.name === item.home_team ? homeTeamData : awayTeamData;
