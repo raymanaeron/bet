@@ -5,6 +5,7 @@ export interface GameRowData {
     sport_key: string;
     sport_title: string;
     bookmaker_key: string;
+    commence_time: string;
     game: string; // Chiefs vs. Lions
     home_team_data: TeamData;
     away_team_data: TeamData;

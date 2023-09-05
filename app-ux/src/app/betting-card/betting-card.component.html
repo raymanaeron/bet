@@ -5,20 +5,23 @@
         <table class="styled-table">
             <thead>
                 <tr>
+                    <th>Period</th>
                     <th>Team</th>
                     <th class="right-content">Spread</th>
+                    <th class="right-content">Money</th>
                     <th class="right-content">Total</th>
-                    <th class="right-content">Money Line</th>
                     <th>Last Update</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td>Entire</td>
                     <td>{{ data.home_team_data.team_name }}</td>
                     <td class="right-content">
                         {{ data.home_team_data.spread_point }}<br>
                         {{ data.home_team_data.spread_price }}
                     </td>
+                    <td class="right-content">{{ data.home_team_data.money_line }}</td>
                     <td class="right-content">
                         <ng-container *ngIf="data.home_team_data.total_point_under">
                             {{ data.home_team_data.total_point_under }}<br>
@@ -36,15 +39,16 @@
                             {{ data.home_team_data.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="right-content">{{ data.home_team_data.money_line }}</td>
                     <td class="centered-content">{{ data.home_team_data.market_last_update | date: "short"}}</td>
                 </tr>
                 <tr>
+                    <td>Entire</td>
                     <td>{{ data.away_team_data.team_name }}</td>
                     <td class="right-content">
                         {{ data.away_team_data.spread_point }}<br>
                         {{ data.away_team_data.spread_price }}
                     </td>
+                    <td class="right-content">{{ data.away_team_data.money_line }}</td>
                     <td class="right-content">
                         <ng-container *ngIf="data.away_team_data.total_point_under">
                             {{ data.away_team_data.total_point_under }}<br>
@@ -62,7 +66,6 @@
                             {{ data.away_team_data.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="right-content">{{ data.away_team_data.money_line }}</td>
                     <td class="centered-content">{{ data.away_team_data.market_last_update | date: "short"}}</td>
                 </tr>
             </tbody>

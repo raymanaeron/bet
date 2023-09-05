@@ -31,10 +31,11 @@ export class DataUtility {
                 }
               });
               break;
+
             case 'totals':
               market.outcomes?.forEach((outcome: any, index: number) => {
-                // Using index to determine the current team: 0 is home and 1 is away
-                const currentTeam = index === 0 ? homeTeamData : awayTeamData;
+                // Using index to determine the current team: 0 is away and 1 is home
+                const currentTeam = index === 0 ? awayTeamData : homeTeamData;
 
                 if (outcome.name === 'Under') {
                   currentTeam.total_point_under = outcome.point;
@@ -62,7 +63,8 @@ export class DataUtility {
           id: item.id,
           sport_key: item.sport_key,
           sport_title: item.sport_title,
-          bookmaker_key: bookmaker.title,
+          bookmaker_key: bookmaker.title === "William Hill (US)" ? "Caesars" : bookmaker.title,
+          commence_time: item.commence_time,
           game: `${item.home_team} vs. ${item.away_team}`,
           home_team_data: homeTeamData,
           away_team_data: awayTeamData,
@@ -70,6 +72,34 @@ export class DataUtility {
       });
     });
 
+    result.sort((a, b) => {
+      // First, compare by commence_time
+      if (a.commence_time < b.commence_time) {
+        return -1;
+      }
+      if (a.commence_time > b.commence_time) {
+        return 1;
+      }
+      
+      // If commence_times are equal, compare by game id
+      if (a.id < b.id) {
+        return -1;
+      }
+      if (a.id > b.id) {
+        return 1;
+      }
+    
+      // If game ids are equal, then compare by sport_key
+      if (a.sport_key < b.sport_key) {
+        return -1;
+      }
+      if (a.sport_key > b.sport_key) {
+        return 1;
+      }
+    
+      return 0; // if both are equal
+    });
+    
     return result;
   }
 
