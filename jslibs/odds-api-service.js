@@ -4,7 +4,7 @@ module.exports = function (app) {
 
     app.get('/profootball', (req, res) => {
         var api_key = "b43e9b75b99d382d7bf597fdd245033e";
-        var url = 'https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds/?apiKey=b43e9b75b99d382d7bf597fdd245033e&regions=us&markets=h2h,spreads,totals&oddsFormat=american&bookmakers=draftkings,betmgm,williamhill_us,fanduel';
+        var url = 'https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds/?apiKey=86b17191d64318c100afd23799071269&regions=us&markets=h2h,spreads,totals&oddsFormat=american&bookmakers=draftkings,betmgm,williamhill_us,fanduel';
         https.get(url, (httpresponse) => {
             let data = '';
 
