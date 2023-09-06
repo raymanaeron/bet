@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataUtility } from '../app.data-mapper';
 import { AppService } from '../app.service';
-import { timer} from 'rxjs';
 
 // required for date pipe
 import { CommonModule } from '@angular/common';
@@ -14,6 +13,7 @@ import { GameRowData } from '../data-models/GameRowData';
 })
 export class CardViewComponent implements OnInit {
   gameData: GameRowData[] = [];
+  currentIndex = 0;
 
   constructor(private appService: AppService) {
   }
@@ -24,24 +24,7 @@ export class CardViewComponent implements OnInit {
         var results = <any>data;
         this.gameData = DataUtility.flattenGameData(results.data);
 
-        this.gameData.forEach((gd: any) => {
-
-          timer(1000).subscribe(x=> {
-            this.appService.getProFootballPeriodicalGameData(gd.id).subscribe({
-              next: (pd) => {
-                console.log(pd);
-              },
-              error: (err) => {
-                console.log("Error in periodical game data fetch");
-                console.log(err);
-              },
-              complete: () => {
-                console.log("Periodical fetch done for game id:" + gd.id);
-              }
-            });
-          });
-          
-        });
+        this.retriveEachGameData();
       },
       error: (error) => {
         console.log("Error in entire game data fetch");
@@ -51,5 +34,30 @@ export class CardViewComponent implements OnInit {
         console.log("Entire game fetch done")
       }
     })
+  }
+
+  retriveEachGameData() {
+    if (this.currentIndex < this.gameData.length) {
+      const currentGame = this.gameData[this.currentIndex];
+
+      this.appService.getProFootballPeriodicalGameData(currentGame.id).subscribe({
+        next: (pd) => {
+          console.log(pd);
+        },
+        error: (err) => {
+          console.log("Error in periodical game data fetch");
+          console.log(err);
+        },
+        complete: () => {
+          console.log("Periodical fetch done for game id:" + currentGame.id);
+        }
+      });
+
+      this.currentIndex++;
+
+      setTimeout(() => {
+        this.retriveEachGameData(); // recursive call
+      }, 1000);
+    }
   }
 }
