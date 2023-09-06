@@ -1,6 +1,7 @@
 import { TeamData } from "./TeamData";
 
 export interface GameRowData {
+    period: string;
     id: string;
     sport_key: string;
     sport_title: string;

@@ -18,7 +18,7 @@ export class CardViewComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.appService.getProFootballData().subscribe({
+    this.appService.getProFootballEntireGameData().subscribe({
       next: (data) => {
         var results = <any>data;
         this.gameData = DataUtility.flattenGameData(results.data);

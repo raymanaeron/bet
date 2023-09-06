@@ -16,7 +16,7 @@ export class DashboardComponent {
   }
 
   ngOnInit(): void {
-    this.appService.getProFootballData().subscribe({
+    this.appService.getProFootballEntireGameData().subscribe({
       next: (data) => {
         var results = <any>data;
         

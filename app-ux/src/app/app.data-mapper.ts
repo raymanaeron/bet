@@ -60,6 +60,7 @@ export class DataUtility {
         });
 
         result.push({
+          period: "Entire",
           id: item.id,
           sport_key: item.sport_key,
           sport_title: item.sport_title,

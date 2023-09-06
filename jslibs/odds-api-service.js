@@ -2,10 +2,35 @@ const https = require('https');
 
 module.exports = function (app) {
 
-    app.get('/profootball', (req, res) => {
-        var api_key = "b43e9b75b99d382d7bf597fdd245033e";
-        var url = 'https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds/?apiKey=86b17191d64318c100afd23799071269&regions=us&markets=h2h,spreads,totals&oddsFormat=american&bookmakers=draftkings,betmgm,williamhill_us,fanduel';
-        https.get(url, (httpresponse) => {
+    app.get('/proentire', (req, res) => {
+        
+        var api_key = "86b17191d64318c100afd23799071269";
+        var entiregameurl = 'https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds/?apiKey=' + api_key + '&regions=us&markets=h2h,spreads,totals&oddsFormat=american&bookmakers=draftkings,betmgm,williamhill_us,fanduel';
+        
+        https.get(entiregameurl, (httpresponse) => {
+            let data = '';
+
+            // A chunk of data has been received.
+            httpresponse.on('data', (chunk) => {
+                data += chunk;
+            });
+
+            // The whole response has been received. 
+            httpresponse.on('end', () => {
+                var result = JSON.parse(data);
+                res.status(200).send({ 'data': result });
+            });
+        }).on("error", (err) => {
+            res.status(200).send({ 'data': err.message });
+        })
+    })
+
+    app.get('/properiodical', (req, res) => {
+        var api_key = "86b17191d64318c100afd23799071269";
+        var gameid = req.query.gameid;
+        var periodicalgameUrl ='https://api.the-odds-api.com/v4/sports/americanfootball_nfl/events/'+ gameid +'/odds?apiKey=' + api_key + '&oddsFormat=american&markets=spreads_q3,spreads_q1,spreads_h1,h2h_h1,h2h_q1,h2h_q3&regions=us&oddsFormat=american&bookmakers=draftkings,betmgm,williamhill_us,fanduel';
+          
+        https.get(periodicalgameUrl, (httpresponse) => {
             let data = '';
 
             // A chunk of data has been received.
