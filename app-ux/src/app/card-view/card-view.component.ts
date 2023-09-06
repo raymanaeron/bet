@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataUtility } from '../app.data-mapper';
 import { AppService } from '../app.service';
+import { timer} from 'rxjs';
 
 // required for date pipe
 import { CommonModule } from '@angular/common';
@@ -24,18 +25,22 @@ export class CardViewComponent implements OnInit {
         this.gameData = DataUtility.flattenGameData(results.data);
 
         this.gameData.forEach((gd: any) => {
-          this.appService.getProFootballPeriodicalGameData(gd.id).subscribe({
-            next: (pd) => {
-              console.log(pd);
-            },
-            error: (err) => {
-              console.log("Error in periodical game data fetch");
-              console.log(err);
-            },
-            complete: () => {
-              console.log("Periodical fetch done for game id:" + gd.id);
-            }
+
+          timer(1000).subscribe(x=> {
+            this.appService.getProFootballPeriodicalGameData(gd.id).subscribe({
+              next: (pd) => {
+                console.log(pd);
+              },
+              error: (err) => {
+                console.log("Error in periodical game data fetch");
+                console.log(err);
+              },
+              complete: () => {
+                console.log("Periodical fetch done for game id:" + gd.id);
+              }
+            });
           });
+          
         });
       },
       error: (error) => {
