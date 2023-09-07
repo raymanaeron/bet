@@ -3,7 +3,7 @@ const jsonstorepath = "/json-data/";
 
 module.exports = function (app) {
     app.get('/jsonstore', (req, res) => {
-        createFolderIfNotExist();
+        createFolderIfNotExist(jsonstorepath);
         const fileName = jsonstorepath + req.query.filename;
         fs.readFile(fileName, 'utf8', (err, data) => {
             if (err) {
@@ -14,11 +14,11 @@ module.exports = function (app) {
     })
 
     app.post('/jsonstore', (req, res) => {
-        createFolderIfNotExist();
+        createFolderIfNotExist(jsonstorepath);
         const fileName = jsonstorepath + req.query.filename;
-        const content = req.body.data;
+        const content = req.body.content.data;
 
-        fs.writeFile(fileName, content, 'utf8', (err)=>{
+        fs.writeFile(fileName, JSON.stringify(content), 'utf8', (err)=>{
             if (err) {
                 res.status(500).send({'data': err.message});
             } else {

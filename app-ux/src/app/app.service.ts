@@ -28,20 +28,28 @@ export class AppService {
   }
 
   getRandKey() {
-    return this.http.get(this.rootURL + '/randkey').pipe(map(res=>res));
+    return this.http.get(this.rootURL + '/randkey').pipe(map(res => res));
   }
 
   getProFootballEntireGameData() {
-    return this.http.get(this.rootURL + '/proentire').pipe(map(res=>res));
+    return this.http.get(this.rootURL + '/proentire').pipe(map(res => res));
   }
 
-  getProFootballPeriodicalGameData(gameid : string) {
-    return this.http.get(this.rootURL + '/properiodical?gameid='+gameid).pipe(map(res=>res));
+  getProFootballPeriodicalGameData(gameid: string) {
+    return this.http.get(this.rootURL + '/properiodical?gameid=' + gameid).pipe(map(res => res));
+  }
+
+  getLocalFile(fileName: string) {
+    return this.http.get(this.rootURL + '/jsonstore?filename=' + fileName).pipe(map(res => res));
+  }
+
+  writeLocalFile(fileName: string, content: string) {
+    return this.http.post(this.rootURL + '/jsonstore?filename=' + fileName, { content }).pipe(map(res => res));
   }
 
   signout() {
     return this.http.get(this.rootURL + '/auth/signout')
-      .pipe(map(res=> res));
+      .pipe(map(res => res));
   }
 
   getAuthStatus() {
@@ -83,7 +91,7 @@ export class AppService {
 
   getAccountBalance() {
     return this.http.get(this.rootURL + '/balance')
-    .pipe(map(res => res));
+      .pipe(map(res => res));
   }
 
   getUsers() {

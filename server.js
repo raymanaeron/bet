@@ -6,7 +6,10 @@ const port = 3080;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
+// These two lines are required because we need to upload a large file
+app.use(bodyParser.json({ limit: '250mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // prod-only
 app.use(express.static(process.cwd() + "/app-ux/dist/app-ux/"));
@@ -16,6 +19,7 @@ app.get('/', (req, res) => {
 
 // Import other services
 require('./jslibs/odds-api-service')(app);
+require('./jslibs/file-service')(app);
 require('./jslibs/auth-service')(app);
 require('./jslibs/helper-service')(app);
 require('./jslibs/data-service')(app);
