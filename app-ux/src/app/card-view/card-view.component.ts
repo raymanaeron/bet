@@ -5,6 +5,7 @@ import { AppService } from '../app.service';
 // required for date pipe
 import { CommonModule } from '@angular/common';
 import { GameRowData } from '../data-models/GameRowData';
+import { UniqueGameData } from '../data-models/UniqueGameData';
 
 @Component({
   selector: 'app-card-view',
@@ -14,6 +15,8 @@ import { GameRowData } from '../data-models/GameRowData';
 export class CardViewComponent implements OnInit {
   gameData: GameRowData[] = [];
   currentIndex = 0;
+  uniqueGameDataMap: { [key: string]: UniqueGameData } = {};
+  uniqueGameDataArray: UniqueGameData[] = [];
 
   constructor(private appService: AppService) {
   }
@@ -23,7 +26,18 @@ export class CardViewComponent implements OnInit {
       next: (data) => {
         var results = <any>data;
         this.gameData = DataUtility.flattenGameData(JSON.parse(results.data));
-        // this.retriveEachGameData();
+        this.gameData.forEach(gd => {
+          if (!this.uniqueGameDataMap[gd.id]) {
+            this.uniqueGameDataMap[gd.id] = {
+              id: gd.id,
+              commence_time: gd.commence_time
+            };
+          }
+
+          this.uniqueGameDataArray = Object.values(this.uniqueGameDataMap);
+        });
+
+        this.retriveEachGameData();
       },
       error: (error) => {
         console.log("Error in entire game data fetch");
@@ -36,12 +50,14 @@ export class CardViewComponent implements OnInit {
   }
 
   retriveEachGameData() {
-    if (this.currentIndex < this.gameData.length) {
-      const currentGame = this.gameData[this.currentIndex];
+    if (this.currentIndex < this.uniqueGameDataArray.length) {
+      //const currentGame = this.gameData[this.currentIndex];
+      const currentGame = this.uniqueGameDataArray[this.currentIndex];
 
-      this.appService.getProFootballPeriodicalGameData(currentGame.id).subscribe({
+      this.appService.getLocalFile(currentGame.id + ".json").subscribe({
         next: (pd) => {
-          console.log(pd);
+          var ld = <any>pd;
+          console.log(JSON.parse(ld.data));
         },
         error: (err) => {
           console.log("Error in periodical game data fetch");
@@ -56,7 +72,7 @@ export class CardViewComponent implements OnInit {
 
       setTimeout(() => {
         this.retriveEachGameData(); // recursive call
-      }, 1000);
+      }, 100);
     }
   }
 }

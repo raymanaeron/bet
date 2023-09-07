@@ -100,7 +100,7 @@ export class LocalDataComponent implements OnInit {
   // Retrives periodical game data for a given game 
   retriveEachGameData() {
 
-    if (this.currentIndex < this.gameData.length) {
+    if (this.currentIndex < this.uniqueGameDataArray.length) {
       // const currentGame = this.gameData[this.currentIndex];
       const currentGame = this.uniqueGameDataArray[this.currentIndex];
 
