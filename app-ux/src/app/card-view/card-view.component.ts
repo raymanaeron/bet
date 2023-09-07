@@ -19,12 +19,14 @@ export class CardViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appService.getProFootballEntireGameData().subscribe({
+      // this.appService.getProFootballEntireGameData().subscribe({
+      this.appService.getLocalFile("entiregame.json").subscribe({
       next: (data) => {
         var results = <any>data;
-        this.gameData = DataUtility.flattenGameData(results.data);
-
-        this.retriveEachGameData();
+        
+        // this.gameData = DataUtility.flattenGameData(results.data);
+        this.gameData = DataUtility.flattenGameData(JSON.parse(results.data));
+        // this.retriveEachGameData();
       },
       error: (error) => {
         console.log("Error in entire game data fetch");
