@@ -1,24 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { DataUtility } from '../app.data-mapper';
 import { AppService } from '../app.service';
-
-// required for date pipe
-import { CommonModule } from '@angular/common';
 import { GameRowData } from '../data-models/GameRowData';
+import { DataUtility } from '../app.data-mapper';
 
 @Component({
-  selector: 'app-card-view',
-  templateUrl: './card-view.component.html',
-  styleUrls: ['./card-view.component.scss']
+  selector: 'app-local-data',
+  templateUrl: './local-data.component.html',
+  styleUrls: ['./local-data.component.scss']
 })
-export class CardViewComponent implements OnInit {
+export class LocalDataComponent  implements OnInit {
+
+  localDataFolder: string;
   gameData: GameRowData[] = [];
   currentIndex = 0;
-
+  
   constructor(private appService: AppService) {
   }
 
   ngOnInit(): void {
+    
+  }
+
+  // Retrives the entire game data
+  retriveEntireGameData() {
     this.appService.getProFootballEntireGameData().subscribe({
       next: (data) => {
         var results = <any>data;
@@ -36,6 +40,7 @@ export class CardViewComponent implements OnInit {
     });
   }
 
+  // Retrives periodical game data for a given game 
   retriveEachGameData() {
     if (this.currentIndex < this.gameData.length) {
       const currentGame = this.gameData[this.currentIndex];

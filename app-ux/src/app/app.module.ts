@@ -37,13 +37,15 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BettingCardComponent } from './betting-card/betting-card.component';
 import { CardViewComponent } from './card-view/card-view.component';
+import { LocalDataComponent } from './local-data/local-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     BettingCardComponent,
-    CardViewComponent
+    CardViewComponent,
+    LocalDataComponent
   ],
   imports: [
     CommonModule,
