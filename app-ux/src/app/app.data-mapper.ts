@@ -10,65 +10,96 @@ export class DataUtility {
 
     if (!Array.isArray(data)) {
       console.error("Input data is not an array");
+
       return result;
     }
 
     data.forEach(item => {
       item.bookmakers.forEach((bookmaker: any) => {
+        var period_name = "";
         const homeTeamData: TeamData = { team_name: item.home_team, market_last_update: "" };
         const awayTeamData: TeamData = { team_name: item.away_team, market_last_update: "" };
 
         bookmaker.markets.forEach((market: any) => {
-          switch (market.key) {
-            case 'spreads':
-              market.outcomes?.forEach((outcome: any) => {
-                const currentTeam = outcome.name === item.home_team ? homeTeamData : awayTeamData;
-                currentTeam.market_last_update = market.last_update;
 
-                if (outcome.name !== 'Over' && outcome.name !== 'Under') {
-                  currentTeam.spread_point = outcome.point;
-                  currentTeam.spread_price = outcome.price;
-                }
-              });
-              break;
+          if (market.key.startsWith('spreads')) {
+            switch (market.key) {
+              case "spreads_h1":
+                period_name = "h1";
+                break;
+              case "spreads_q1":
+                period_name = "q1";
+                break;
+              case "spreads_q3":
+                period_name = "q3";
+                break;
+              default:
+                period_name = "entire";
+                break;
+            }
 
-            case 'totals':
-              market.outcomes?.forEach((outcome: any, index: number) => {
-                // Using index to determine the current team: 0 is away and 1 is home
-                const currentTeam = index === 0 ? awayTeamData : homeTeamData;
+            market.outcomes?.forEach((outcome: any) => {
+              const currentTeam = outcome.name === item.home_team ? homeTeamData : awayTeamData;
+              currentTeam.market_last_update = market.last_update;
 
-                if (outcome.name === 'Under') {
-                  currentTeam.total_point_under = outcome.point;
-                  currentTeam.total_price_under = outcome.price;
-                } else if (outcome.name === 'Over') {
-                  currentTeam.total_point_over = outcome.point;
-                  currentTeam.total_price_over = outcome.price;
-                }
-              });
-              break;
-
-            case 'h2h':
-              market.outcomes?.forEach((outcome: any) => {
-                const currentTeam = outcome.name === item.home_team ? homeTeamData : awayTeamData;
-
-                if (outcome.name !== 'Over' && outcome.name !== 'Under') {
-                  currentTeam.money_line = outcome.price;
-                }
-              });
-              break;
+              if (outcome.name !== 'Over' && outcome.name !== 'Under') {
+                currentTeam.spread_point = outcome.point;
+                currentTeam.spread_price = outcome.price;
+              }
+            });
           }
-        });
 
-        result.push({
-          period: "Entire",
-          id: item.id,
-          sport_key: item.sport_key,
-          sport_title: item.sport_title,
-          bookmaker_key: bookmaker.title === "William Hill (US)" ? "Caesars" : bookmaker.title,
-          commence_time: item.commence_time,
-          game: `${item.home_team} vs. ${item.away_team}`,
-          home_team_data: homeTeamData,
-          away_team_data: awayTeamData,
+          if (market.key.startsWith('totals')) {
+            period_name = "entire";
+            market.outcomes?.forEach((outcome: any, index: number) => {
+              // Using index to determine the current team: 0 is away and 1 is home
+              const currentTeam = index === 0 ? awayTeamData : homeTeamData;
+
+              if (outcome.name === 'Under') {
+                currentTeam.total_point_under = outcome.point;
+                currentTeam.total_price_under = outcome.price;
+              } else if (outcome.name === 'Over') {
+                currentTeam.total_point_over = outcome.point;
+                currentTeam.total_price_over = outcome.price;
+              }
+            });
+          }
+
+          if (market.key.startsWith('h2h')) {
+            switch (market.key) {
+              case "h2h_h1":
+                period_name = "h1";
+                break;
+              case "h2h_q1":
+                period_name = "q1";
+                break;
+              case "h2h_q3":
+                period_name = "q3";
+                break;
+              default:
+                period_name = "entire";
+                break;
+            }
+            market.outcomes?.forEach((outcome: any) => {
+              const currentTeam = outcome.name === item.home_team ? homeTeamData : awayTeamData;
+
+              if (outcome.name !== 'Over' && outcome.name !== 'Under') {
+                currentTeam.money_line = outcome.price;
+              }
+            });
+          }
+
+          result.push({
+            period: period_name,
+            id: item.id,
+            sport_key: item.sport_key,
+            sport_title: item.sport_title,
+            bookmaker_key: bookmaker.title === "William Hill (US)" ? "Caesars" : bookmaker.title,
+            commence_time: item.commence_time,
+            game: `${item.home_team} vs. ${item.away_team}`,
+            home_team_data: homeTeamData,
+            away_team_data: awayTeamData,
+          })
         });
       });
     });
@@ -81,7 +112,7 @@ export class DataUtility {
       if (a.commence_time > b.commence_time) {
         return 1;
       }
-      
+
       // If commence_times are equal, compare by game id
       if (a.id < b.id) {
         return -1;
@@ -89,18 +120,26 @@ export class DataUtility {
       if (a.id > b.id) {
         return 1;
       }
-    
-      // If game ids are equal, then compare by sport_key
-      if (a.sport_key < b.sport_key) {
+
+      // If game ids are equal, then compare by bookmaker_key
+      if (a.bookmaker_key < b.bookmaker_key) {
         return -1;
       }
-      if (a.sport_key > b.sport_key) {
+      if (a.bookmaker_key > b.bookmaker_key) {
         return 1;
       }
-    
+
+      // by period
+      if (a.period < b.period) {
+        return -1;
+      }
+      if (a.period > b.period) {
+        return 1;
+      }
+
       return 0; // if both are equal
     });
-    
+
     return result;
   }
 

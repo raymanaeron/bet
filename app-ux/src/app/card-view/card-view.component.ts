@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataUtility } from '../app.data-mapper';
 import { AppService } from '../app.service';
+import { BehaviorSubject } from 'rxjs';
 
 // required for date pipe
 import { CommonModule } from '@angular/common';
@@ -17,8 +18,13 @@ export class CardViewComponent implements OnInit {
   currentIndex = 0;
   uniqueGameDataMap: { [key: string]: UniqueGameData } = {};
   uniqueGameDataArray: UniqueGameData[] = [];
-
+  
   constructor(private appService: AppService) {
+   
+  }
+
+  dumptoconsole() {
+    console.log(this.gameData);
   }
 
   ngOnInit(): void {
@@ -33,7 +39,7 @@ export class CardViewComponent implements OnInit {
               commence_time: gd.commence_time
             };
           }
-
+          
           this.uniqueGameDataArray = Object.values(this.uniqueGameDataMap);
         });
 
@@ -57,14 +63,23 @@ export class CardViewComponent implements OnInit {
       this.appService.getLocalFile(currentGame.id + ".json").subscribe({
         next: (pd) => {
           var ld = <any>pd;
-          console.log(JSON.parse(ld.data));
+
+          // the util expects and array so create one and add our currentitem into it
+          var ldarr = [];
+          ldarr.push(JSON.parse(ld.data));
+
+          var dt = DataUtility.flattenGameData(ldarr);
+          
+          dt.forEach(o=> {
+            this.gameData.push(o);
+          })
         },
         error: (err) => {
           console.log("Error in periodical game data fetch");
           console.log(err);
         },
         complete: () => {
-          console.log("Periodical fetch done for game id:" + currentGame.id);
+          console.log("Periodical fetch done for game id:" + currentGame.id +  ", length: "+this.gameData.length);
         }
       });
 

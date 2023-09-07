@@ -15,7 +15,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Entire</td>
+                    <td>{{ data.period }}</td>
                     <td>{{ data.home_team_data.team_name }}</td>
                     <td class="right-content">
                         {{ data.home_team_data.spread_point }}<br>
@@ -42,7 +42,7 @@
                     <td class="centered-content">{{ data.home_team_data.market_last_update | date: "short"}}</td>
                 </tr>
                 <tr>
-                    <td>Entire</td>
+                    <td>{{ data.period }}</td>
                     <td>{{ data.away_team_data.team_name }}</td>
                     <td class="right-content">
                         {{ data.away_team_data.spread_point }}<br>
