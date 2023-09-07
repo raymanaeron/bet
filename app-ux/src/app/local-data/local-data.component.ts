@@ -41,16 +41,6 @@ export class LocalDataComponent implements OnInit {
 
   startProcessing() {
     this.retriveEntireGameData();
-    /*
-    const currentLines = [];
-    // Simulating asynchronous processing of 1000+ items
-    for (let i = 1; i <= 1000; i++) {
-      setTimeout(() => {
-        currentLines.push(`Processing line ${i}`);
-        this._lines.next([...currentLines]);
-        this.shouldScroll = true;
-      }, i * 50); // 50 ms delay for each line, adjust as necessary
-    }*/
   }
 
   clearContent() {
