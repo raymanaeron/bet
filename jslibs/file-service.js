@@ -37,8 +37,9 @@ module.exports = function (app) {
     }
 
     function createFolderIfNotExist(folderPath) {
+        // console.log(folderPath);
         if (!fs.existsSync(folderPath)) {
-            fs.mkdir(folderPath, { recursive: true }), (err) => {
+            fs.mkdirSync(folderPath, { recursive: true }), (err) => {
                 if (err) {
                     console.log(err);
                 }
