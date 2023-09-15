@@ -1,6 +1,9 @@
 <mat-card>
     <mat-card-title>{{ data.game }}</mat-card-title>
-    <mat-card-subtitle>Bookmaker: {{ data.bookmaker_key }}</mat-card-subtitle>
+    <mat-card-subtitle>
+        Bookmaker: {{ data.bookmaker_key }}<br />
+        Commence: {{ data.commence_time | date: 'short' }}
+    </mat-card-subtitle>
     <mat-card-content>
         <table class="styled-table">
             <thead>
@@ -14,60 +17,230 @@
                 </tr>
             </thead>
             <tbody>
+                <!--ENTIRE-->
                 <tr>
                     <td>{{ data.period }}</td>
-                    <td>{{ data.home_team_data.team_name }}</td>
+                    <td>{{ data.entire_home_team_data?.team_name }}</td>
                     <td class="right-content">
-                        {{ data.home_team_data.spread_point }}<br>
-                        {{ data.home_team_data.spread_price }}
+                        {{ data.entire_home_team_data?.spread_point }}<br>
+                        {{ data.entire_home_team_data?.spread_price }}
                     </td>
-                    <td class="right-content">{{ data.home_team_data.money_line }}</td>
+                    <td class="right-content">{{ data.entire_home_team_data?.money_line }}</td>
                     <td class="right-content">
-                        <ng-container *ngIf="data.home_team_data.total_point_under">
-                            {{ data.home_team_data.total_point_under }}<br>
+                        <ng-container *ngIf="data.entire_home_team_data?.total_point_under">
+                            {{ data.entire_home_team_data?.total_point_under }}<br>
                         </ng-container>
-                    
-                        <ng-container *ngIf="data.home_team_data.total_price_under">
-                            {{ data.home_team_data.total_price_under }}<br>
+
+                        <ng-container *ngIf="data.entire_home_team_data?.total_price_under">
+                            {{ data.entire_home_team_data?.total_price_under }}<br>
                         </ng-container>
-                    
-                        <ng-container *ngIf="data.home_team_data.total_point_over">
-                            {{ data.home_team_data.total_point_over }}<br>
+
+                        <ng-container *ngIf="data.entire_home_team_data?.total_point_over">
+                            {{ data.entire_home_team_data?.total_point_over }}<br>
                         </ng-container>
-                    
-                        <ng-container *ngIf="data.home_team_data.total_price_over">
-                            {{ data.home_team_data.total_price_over }}
+
+                        <ng-container *ngIf="data.entire_home_team_data?.total_price_over">
+                            {{ data.entire_home_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.home_team_data.market_last_update | date: "short"}}</td>
+                    <td class="centered-content">{{ data.entire_home_team_data?.market_last_update | date: "short"}}
+                    </td>
                 </tr>
                 <tr>
                     <td>{{ data.period }}</td>
-                    <td>{{ data.away_team_data.team_name }}</td>
+                    <td>{{ data.entire_away_team_data?.team_name }}</td>
                     <td class="right-content">
-                        {{ data.away_team_data.spread_point }}<br>
-                        {{ data.away_team_data.spread_price }}
+                        {{ data.entire_away_team_data?.spread_point }}<br>
+                        {{ data.entire_away_team_data?.spread_price }}
                     </td>
-                    <td class="right-content">{{ data.away_team_data.money_line }}</td>
+                    <td class="right-content">{{ data.entire_away_team_data?.money_line }}</td>
                     <td class="right-content">
-                        <ng-container *ngIf="data.away_team_data.total_point_under">
-                            {{ data.away_team_data.total_point_under }}<br>
+                        <ng-container *ngIf="data.entire_away_team_data?.total_point_under">
+                            {{ data.entire_away_team_data?.total_point_under }}<br>
                         </ng-container>
-                    
-                        <ng-container *ngIf="data.away_team_data.total_price_under">
-                            {{ data.away_team_data.total_price_under }}<br>
+
+                        <ng-container *ngIf="data.entire_away_team_data?.total_price_under">
+                            {{ data.entire_away_team_data?.total_price_under }}<br>
                         </ng-container>
-                    
-                        <ng-container *ngIf="data.away_team_data.total_point_over">
-                            {{ data.away_team_data.total_point_over }}<br>
+
+                        <ng-container *ngIf="data.entire_away_team_data?.total_point_over">
+                            {{ data.entire_away_team_data?.total_point_over }}<br>
                         </ng-container>
-                    
-                        <ng-container *ngIf="data.away_team_data.total_price_over">
-                            {{ data.away_team_data.total_price_over }}
+
+                        <ng-container *ngIf="data.entire_away_team_data?.total_price_over">
+                            {{ data.entire_away_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.away_team_data.market_last_update | date: "short"}}</td>
+                    <td class="centered-content">{{ data.entire_away_team_data?.market_last_update | date: "short"}}
+                    </td>
                 </tr>
+                <!--H1-->
+                <tr>
+                    <td>{{ data.period }}</td>
+                    <td>{{ data.h1_home_team_data?.team_name }}</td>
+                    <td class="right-content">
+                        {{ data.h1_home_team_data?.spread_point }}<br>
+                        {{ data.h1_home_team_data?.spread_price }}
+                    </td>
+                    <td class="right-content">{{ data.h1_home_team_data?.money_line }}</td>
+                    <td class="right-content">
+                        <ng-container *ngIf="data.h1_home_team_data?.total_point_under">
+                            {{ data.h1_home_team_data?.total_point_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.h1_home_team_data?.total_price_under">
+                            {{ data.h1_home_team_data?.total_price_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.h1_home_team_data?.total_point_over">
+                            {{ data.h1_home_team_data?.total_point_over }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.h1_home_team_data?.total_price_over">
+                            {{ data.h1_home_team_data?.total_price_over }}
+                        </ng-container>
+                    </td>
+                    <td class="centered-content">{{ data.h1_home_team_data?.market_last_update | date: "short"}}</td>
+                </tr>
+                <tr>
+                    <td>{{ data.period }}</td>
+                    <td>{{ data.h1_away_team_data?.team_name }}</td>
+                    <td class="right-content">
+                        {{ data.h1_away_team_data?.spread_point }}<br>
+                        {{ data.h1_away_team_data?.spread_price }}
+                    </td>
+                    <td class="right-content">{{ data.h1_away_team_data?.money_line }}</td>
+                    <td class="right-content">
+                        <ng-container *ngIf="data.h1_away_team_data?.total_point_under">
+                            {{ data.h1_away_team_data?.total_point_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.h1_away_team_data?.total_price_under">
+                            {{ data.h1_away_team_data?.total_price_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.h1_away_team_data?.total_point_over">
+                            {{ data.h1_away_team_data?.total_point_over }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.h1_away_team_data?.total_price_over">
+                            {{ data.h1_away_team_data?.total_price_over }}
+                        </ng-container>
+                    </td>
+                    <td class="centered-content">{{ data.h1_away_team_data?.market_last_update | date: "short"}}</td>
+                </tr>
+
+                <!--Q1-->
+                <tr>
+                    <td>{{ data.period }}</td>
+                    <td>{{ data.q1_home_team_data?.team_name }}</td>
+                    <td class="right-content">
+                        {{ data.q1_home_team_data?.spread_point }}<br>
+                        {{ data.q1_home_team_data?.spread_price }}
+                    </td>
+                    <td class="right-content">{{ data.q1_home_team_data?.money_line }}</td>
+                    <td class="right-content">
+                        <ng-container *ngIf="data.q1_home_team_data?.total_point_under">
+                            {{ data.q1_home_team_data?.total_point_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q1_home_team_data?.total_price_under">
+                            {{ data.q1_home_team_data?.total_price_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q1_home_team_data?.total_point_over">
+                            {{ data.q1_home_team_data?.total_point_over }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q1_home_team_data?.total_price_over">
+                            {{ data.q1_home_team_data?.total_price_over }}
+                        </ng-container>
+                    </td>
+                    <td class="centered-content">{{ data.q1_home_team_data?.market_last_update | date: "short"}}</td>
+                </tr>
+                <tr>
+                    <td>{{ data.period }}</td>
+                    <td>{{ data.q1_away_team_data?.team_name }}</td>
+                    <td class="right-content">
+                        {{ data.q1_away_team_data?.spread_point }}<br>
+                        {{ data.q1_away_team_data?.spread_price }}
+                    </td>
+                    <td class="right-content">{{ data.q1_away_team_data?.money_line }}</td>
+                    <td class="right-content">
+                        <ng-container *ngIf="data.q1_away_team_data?.total_point_under">
+                            {{ data.q1_away_team_data?.total_point_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q1_away_team_data?.total_price_under">
+                            {{ data.q1_away_team_data?.total_price_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q1_away_team_data?.total_point_over">
+                            {{ data.q1_away_team_data?.total_point_over }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q1_away_team_data?.total_price_over">
+                            {{ data.q1_away_team_data?.total_price_over }}
+                        </ng-container>
+                    </td>
+                    <td class="centered-content">{{ data.q1_away_team_data?.market_last_update | date: "short"}}</td>
+                </tr>
+                <!--Q3-->
+                <tr>
+                    <td>{{ data.period }}</td>
+                    <td>{{ data.q3_home_team_data?.team_name }}</td>
+                    <td class="right-content">
+                        {{ data.q3_home_team_data?.spread_point }}<br>
+                        {{ data.q3_home_team_data?.spread_price }}
+                    </td>
+                    <td class="right-content">{{ data.q3_home_team_data?.money_line }}</td>
+                    <td class="right-content">
+                        <ng-container *ngIf="data.q3_home_team_data?.total_point_under">
+                            {{ data.q3_home_team_data?.total_point_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q3_home_team_data?.total_price_under">
+                            {{ data.q3_home_team_data?.total_price_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q3_home_team_data?.total_point_over">
+                            {{ data.q3_home_team_data?.total_point_over }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q3_home_team_data?.total_price_over">
+                            {{ data.q3_home_team_data?.total_price_over }}
+                        </ng-container>
+                    </td>
+                    <td class="centered-content">{{ data.q3_home_team_data?.market_last_update | date: "short"}}</td>
+                </tr>
+                <tr>
+                    <td>{{ data.period }}</td>
+                    <td>{{ data.q3_away_team_data?.team_name }}</td>
+                    <td class="right-content">
+                        {{ data.q3_away_team_data?.spread_point }}<br>
+                        {{ data.q3_away_team_data?.spread_price }}
+                    </td>
+                    <td class="right-content">{{ data.q3_away_team_data?.money_line }}</td>
+                    <td class="right-content">
+                        <ng-container *ngIf="data.q3_away_team_data?.total_point_under">
+                            {{ data.q3_away_team_data?.total_point_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q3_away_team_data?.total_price_under">
+                            {{ data.q3_away_team_data?.total_price_under }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q3_away_team_data?.total_point_over">
+                            {{ data.q3_away_team_data?.total_point_over }}<br>
+                        </ng-container>
+
+                        <ng-container *ngIf="data.q3_away_team_data?.total_price_over">
+                            {{ data.q3_away_team_data?.total_price_over }}
+                        </ng-container>
+                    </td>
+                    <td class="centered-content">{{ data.q3_away_team_data?.market_last_update | date: "short"}}</td>
+                </tr>
+
             </tbody>
         </table>
     </mat-card-content>

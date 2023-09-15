@@ -7,7 +7,13 @@ export interface GameRowData {
     sport_title: string;
     bookmaker_key: string;
     commence_time: string;
-    game: string; // Chiefs vs. Lions
-    home_team_data: TeamData;
-    away_team_data: TeamData;
+    game: string;
+    entire_home_team_data?: TeamData;
+    entire_away_team_data?: TeamData;
+    h1_home_team_data?: TeamData;
+    h1_away_team_data?: TeamData;
+    q1_home_team_data?: TeamData;
+    q1_away_team_data?: TeamData;
+    q3_home_team_data?: TeamData;
+    q3_away_team_data?: TeamData;
 }

@@ -1,5 +1,6 @@
+// TeamData.ts
 export interface TeamData {
-    team_name: string;
+    team_name?: string;
     spread_point?: number;
     spread_price?: number;
     total_point_under?: number;
@@ -7,5 +8,5 @@ export interface TeamData {
     total_point_over?: number;
     total_price_over?: number;
     money_line?: number;
-    market_last_update: string;
+    market_last_update?: string;
 }

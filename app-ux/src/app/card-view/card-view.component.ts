@@ -50,7 +50,8 @@ export class CardViewComponent implements OnInit {
         console.log(error);
       },
       complete: () => {
-        console.log("Entire game fetch done")
+        console.log("Entire game fetch done");
+        console.log(this.gameData);
       }
     });
   }

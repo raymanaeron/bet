@@ -19,13 +19,14 @@ export class DashboardComponent {
     this.appService.getProFootballEntireGameData().subscribe({
       next: (data) => {
         var results = <any>data;
-        
+        /*
         var rows = DataUtility.flattenInputData(results.data);
 
         this.table_data = [];
         rows.forEach((r: any) => {
           this.table_data.push(r);
         });
+        */
       },
       error: (error) => {
         console.log(error);

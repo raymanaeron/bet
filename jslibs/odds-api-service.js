@@ -5,8 +5,10 @@ module.exports = function (app) {
     app.get('/proentire', (req, res) => {
         const api_key = "86b17191d64318c100afd23799071269";
         const currentDateUTC = new Date();
+        currentDateUTC.setHours(currentDateUTC.getHours() - 6);
+
         const futureDateUTC = new Date(currentDateUTC);
-        futureDateUTC.setHours(currentDateUTC.getHours() + 72);
+        futureDateUTC.setHours(currentDateUTC.getHours() + 96);
         
         var fromDateParam = '&commenceTimeFrom=' + currentDateUTC.toISOString().slice(0, -5) + 'Z';;
         var toDateParam = '&commenceTimeTo='+ futureDateUTC.toISOString().slice(0, -5) + 'Z';;
