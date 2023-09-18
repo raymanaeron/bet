@@ -31,6 +31,10 @@ export class AppService {
     return this.http.get(this.rootURL + '/randkey').pipe(map(res => res));
   }
 
+  getProFootballGameData() {
+    return this.http.get(this.rootURL + '/gamedata').pipe(map(res => res));
+  }
+
   getProFootballEntireGameData() {
     return this.http.get(this.rootURL + '/proentire').pipe(map(res => res));
   }

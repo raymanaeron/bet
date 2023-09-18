@@ -28,6 +28,20 @@ export class CardViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.appService.getProFootballGameData().subscribe({
+      next: (data) => {
+        this.gameData = <any>data;
+      }, 
+      error: (error) => {
+        console.log("Error retrieving game data from sql server");
+        console.log(error);
+      },
+      complete: () => {
+        console.log("Game data fetch done");
+      }
+    });
+
+    /*
       this.appService.getLocalFile("entiregame.json").subscribe({
       next: (data) => {
         var results = <any>data;
@@ -54,6 +68,7 @@ export class CardViewComponent implements OnInit {
         console.log(this.gameData);
       }
     });
+    */
   }
 
   retriveEachGameData() {

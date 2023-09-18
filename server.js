@@ -27,6 +27,7 @@ require('./jslibs/sms-verification-service')(app);
 require('./jslibs/phone-service')(app);
 require('./jslibs/proxy-service')(app);
 require('./jslibs/admin-tasks')(app);
+require('./jslibs/db-data-service')(app);
 
 // for direct routing fix
 app.use('*', (req, res, next) => {
