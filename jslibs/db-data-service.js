@@ -8,4 +8,17 @@ module.exports = function (app) {
         });
     });
 
+    app.post('/entiregamedata', (req, res) => {
+        const json = req.body.data;
+        sqlprovider.postEntireGameData(json, (cb) => {
+            res.status(200).send(cb);
+        });
+    });
+
+    app.post('/periodicalgamedata', (req, res) => {
+        const json = req.body.data;
+        sqlprovider.postPeriodicalGameData(json, (cb) => {
+            res.status(200).send(cb);
+        });
+    });
 }

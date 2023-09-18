@@ -35,6 +35,14 @@ export class AppService {
     return this.http.get(this.rootURL + '/gamedata').pipe(map(res => res));
   }
 
+  saveProFootballEntireGameData(data: any) {
+    return this.http.post(this.rootURL + '/entiregamedata', { data }).pipe(map(res => res));
+  }
+
+  saveProFootballPeriodicalGameData(data: any) {
+    return this.http.post(this.rootURL + '/periodicalgamedata', { data }).pipe(map(res => res));
+  }
+
   getProFootballEntireGameData() {
     return this.http.get(this.rootURL + '/proentire').pipe(map(res => res));
   }
