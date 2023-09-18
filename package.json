@@ -25,6 +25,7 @@
     "express": "^4.17.3",
     "google-libphonenumber": "^3.2.33",
     "jsonwebtoken": "^9.0.2",
+    "mssql": "^10.0.1",
     "mysql": "^2.18.1",
     "twilio": "^4.16.0"
   },
