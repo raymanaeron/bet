@@ -1,15 +1,15 @@
 .cards-container {
   display: grid;
-  margin: 20px;
+  margin: 1px;
   grid-template-columns: repeat(1, 1fr); // By default, 1 card in a row for mobile views
-  gap: 15px;
+  gap: 3px;
 
-  @media (min-width: 600px) {
+  @media (min-width: 400px) {
     // Adjust these breakpoints as needed
     grid-template-columns: repeat(2, 1fr); // 2 cards in a row for tablets
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 600px) {
     grid-template-columns: repeat(4, 1fr); // 4 cards in a row for desktop views
   }
 }

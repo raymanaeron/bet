@@ -1,36 +1,18 @@
 mat-toolbar {
-    display: flex;
-    position: relative;
+    display: flexbox;
+    position:relative;
     z-index: 2;
     justify-content: space-between;
     background: #2e65a3;
     color: white;
-    width: 100%;
+    width: 100% !important;
 }
 
+.vertical-spacer {
+    height: 40px;
+}
 .spacer {
     flex: 1 1 auto;
-}
-
-.amz-login-button {
-    width: 50px;
-    height: 20px;
-}
-
-.amz-pay-button {
-    width: 75px;
-    height: 35px;
-}
-
-mat-sidenav {
-    margin: 16px;
-    width: 250px;
-    border-right: none;
-    background: #01274d;
-    color: white;
-    border-radius: 0px;
-    padding: 2px;
-    text-align: center;
 }
 
 .content {

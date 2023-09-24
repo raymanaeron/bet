@@ -2,31 +2,5 @@
 
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-html, body { 
-    height: 100%; 
-    margin: 0;
-    padding: 0;
-}
-
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.page-title {
-    margin-left: 35px;
-    margin-right: 35px;
-}
-
-.title {
-    margin-top: 30px;
-    font-size: x-large;
-    font-weight: lighter;
-    color: indigo;
-}
-
-.subtitle {
-    margin-top: 30px;
-    font-size: large;
-    font-weight: lighter;
-    color: indigo;
-}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

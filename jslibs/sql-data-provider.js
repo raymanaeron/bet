@@ -11,7 +11,6 @@ const config = {
     }
 };
 
-
 async function getGameData(callback) {
     try {
         let connection = await sql.connect(config);
@@ -28,7 +27,7 @@ async function getGameData(callback) {
 async function postEntireGameData(json, callback) {
     try {
         let connection = await sql.connect(config);
-        let result =await connection.request().input('json', sql.NVarCharMax, json)
+        let result = await connection.request().input('json', sql.NVarChar, json)
                                 .execute('InsertTotalGameData');
         
         callback({ 'status': 'inserted' });
@@ -43,7 +42,7 @@ async function postEntireGameData(json, callback) {
 async function postPeriodicalGameData(json, callback) {
     try {
         let connection = await sql.connect(config);
-        let result =await connection.request().input('json', sql.NVarCharMax, json)
+        let result =await connection.request().input('json', sql.NVarChar, json)
                                 .execute('InsertPeriodGameData');
         
         callback({ 'status': 'inserted' });

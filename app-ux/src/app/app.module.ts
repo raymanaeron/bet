@@ -38,6 +38,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BettingCardComponent } from './betting-card/betting-card.component';
 import { CardViewComponent } from './card-view/card-view.component';
 import { LocalDataComponent } from './local-data/local-data.component';
+import { DataSyncComponent } from './data-sync/data-sync.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LocalDataComponent } from './local-data/local-data.component';
     DashboardComponent,
     BettingCardComponent,
     CardViewComponent,
-    LocalDataComponent
+    LocalDataComponent,
+    DataSyncComponent
   ],
   imports: [
     CommonModule,
