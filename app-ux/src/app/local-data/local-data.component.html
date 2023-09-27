@@ -1,8 +1,0 @@
-<div class="outer-container">
-    <div #scrollContainer class="scroll-container">
-        <div *ngFor="let line of lines$ | async">{{ line }}</div>
-    </div>
-
-    <button mat-raised-button color="primary" (click)="startProcessing()">Start Processing</button>
-    <button mat-raised-button color="primary" (click)="clearContent()">Clear</button>
-</div>

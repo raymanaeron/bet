@@ -6,12 +6,8 @@ const port = 3080;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// These two lines are required because we need to upload a large file
 app.use(bodyParser.json({ limit: '250mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-
-// prod-only
 app.use(express.static(process.cwd() + "/app-ux/dist/app-ux/"));
 app.get('/', (req, res) => {
     res.sendFile(process.cwd() + "/app-ux/dist/app-ux/index.html");
@@ -20,18 +16,10 @@ app.get('/', (req, res) => {
 // Import other services
 require('./jslibs/odds-api-service')(app);
 require('./jslibs/file-service')(app);
-require('./jslibs/auth-service')(app);
-require('./jslibs/helper-service')(app);
-require('./jslibs/data-service')(app);
-require('./jslibs/sms-verification-service')(app);
-require('./jslibs/phone-service')(app);
-require('./jslibs/proxy-service')(app);
-require('./jslibs/admin-tasks')(app);
 require('./jslibs/db-data-service')(app);
 
 // for direct routing fix
 app.use('*', (req, res, next) => {
-    //res.sendFile(path.join(__dirname, "/app-ux/dist/app-ux/index.html"));
     res.sendFile(process.cwd() + "/app-ux/dist/app-ux/index.html");
 });
 

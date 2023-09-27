@@ -1,8 +1,8 @@
 mat-toolbar {
-    display: flexbox;
+    display:flex;
     position:relative;
     z-index: 2;
-    justify-content: space-between;
+    justify-content:safe;
     background: #2e65a3;
     color: white;
     width: 100% !important;

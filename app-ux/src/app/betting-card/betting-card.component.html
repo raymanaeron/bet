@@ -1,8 +1,8 @@
 <mat-card>
     <mat-card-title>{{ data.game }}</mat-card-title>
     <mat-card-subtitle>
-        Bookmaker: {{ data.bookmaker_key }}<br />
-        Commence: {{ data.commence_time | date: 'short' }}
+        Bookmaker: {{ data.bookmaker_key | uppercase }}<br />
+        Commence: {{ data.commence_time | customDate }}
     </mat-card-subtitle>
     <mat-card-content>
         <table class="styled-table">
@@ -43,7 +43,7 @@
                             {{ data.entire_home_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.entire_home_team_data?.market_last_update | date: "short"}}
+                    <td class="centered-content">{{ data.entire_home_team_data?.market_last_update ?? '' | customDate}}
                     </td>
                 </tr>
                 <tr>
@@ -71,7 +71,7 @@
                             {{ data.entire_away_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.entire_away_team_data?.market_last_update | date: "short"}}
+                    <td class="centered-content">{{ data.entire_away_team_data?.market_last_update ?? '' | customDate}}
                     </td>
                 </tr>
                 <!--H1-->
@@ -100,7 +100,7 @@
                             {{ data.h1_home_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.h1_home_team_data?.market_last_update | date: "short"}}</td>
+                    <td class="centered-content">{{ data.h1_home_team_data?.market_last_update ?? '' | customDate}}</td>
                 </tr>
                 <tr>
                     <td>H1</td>
@@ -127,7 +127,7 @@
                             {{ data.h1_away_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.h1_away_team_data?.market_last_update | date: "short"}}</td>
+                    <td class="centered-content">{{ data.h1_away_team_data?.market_last_update ?? '' | customDate}}</td>
                 </tr>
 
                 <!--Q1-->
@@ -156,7 +156,7 @@
                             {{ data.q1_home_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.q1_home_team_data?.market_last_update | date: "short"}}</td>
+                    <td class="centered-content">{{ data.q1_home_team_data?.market_last_update ?? '' | customDate}}</td>
                 </tr>
                 <tr>
                     <td>Q1</td>
@@ -183,7 +183,7 @@
                             {{ data.q1_away_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.q1_away_team_data?.market_last_update | date: "short"}}</td>
+                    <td class="centered-content">{{ data.q1_away_team_data?.market_last_update ?? '' | customDate}}</td>
                 </tr>
                 <!--Q3-->
                 <tr>
@@ -211,7 +211,7 @@
                             {{ data.q3_home_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.q3_home_team_data?.market_last_update | date: "short"}}</td>
+                    <td class="centered-content">{{ data.q3_home_team_data?.market_last_update ?? '' | customDate}}</td>
                 </tr>
                 <tr>
                     <td>Q3</td>
@@ -238,7 +238,7 @@
                             {{ data.q3_away_team_data?.total_price_over }}
                         </ng-container>
                     </td>
-                    <td class="centered-content">{{ data.q3_away_team_data?.market_last_update | date: "short"}}</td>
+                    <td class="centered-content">{{ data.q3_away_team_data?.market_last_update ?? '' | customDate}}</td>
                 </tr>
 
             </tbody>

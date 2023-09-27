@@ -1,15 +1,16 @@
-import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { AppService } from '../app.service';
 import { GameRowData } from '../data-models/GameRowData';
-import { DataUtility } from '../app.data-mapper';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UniqueGameData } from '../data-models/UniqueGameData';
+import { interval, Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-data-sync',
   templateUrl: './data-sync.component.html',
   styleUrls: ['./data-sync.component.scss']
 })
-export class DataSyncComponent implements OnInit {
+export class DataSyncComponent implements OnInit, OnDestroy {
 
   private _lines = new BehaviorSubject<string[]>([]);
   lines$: Observable<string[]> = this._lines.asObservable();
@@ -18,6 +19,8 @@ export class DataSyncComponent implements OnInit {
   currentIndex = 0;
   uniqueGameDataMap: { [key: string]: UniqueGameData } = {};
   uniqueGameDataArray: UniqueGameData[] = [];
+  private subscription: Subscription;
+  public count = 0;
 
   @ViewChild('scrollContainer') private scrollContainer: ElementRef;
 
@@ -25,7 +28,16 @@ export class DataSyncComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subscription = interval(15000).subscribe(() => {
+      this.startProcessing();
+    });
+  }
 
+  ngOnDestroy() {
+    // Important to unsubscribe to prevent memory leaks
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   ngAfterViewChecked() {
@@ -56,6 +68,7 @@ export class DataSyncComponent implements OnInit {
   }
 
   startProcessing() {
+    this.clearContent();
     this.appService.getProFootballEntireGameData().subscribe({
       next: (data) => {
         let results = <any>data;

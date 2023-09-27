@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -34,20 +33,18 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 // Local
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { BettingCardComponent } from './betting-card/betting-card.component';
 import { CardViewComponent } from './card-view/card-view.component';
-import { LocalDataComponent } from './local-data/local-data.component';
 import { DataSyncComponent } from './data-sync/data-sync.component';
+import { CustomDatePipe } from './custom-date.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     BettingCardComponent,
     CardViewComponent,
-    LocalDataComponent,
-    DataSyncComponent
+    DataSyncComponent,
+    CustomDatePipe
   ],
   imports: [
     CommonModule,
