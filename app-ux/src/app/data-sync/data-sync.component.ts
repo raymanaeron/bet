@@ -28,7 +28,7 @@ export class DataSyncComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = interval(15000).subscribe(() => {
+    this.subscription = interval(30000).subscribe(() => {
       this.startProcessing();
     });
   }
